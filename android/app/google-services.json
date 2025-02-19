@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "1087665065290",
+    "project_id": "food-ninja-84da7",
+    "storage_bucket": "food-ninja-84da7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087665065290:android:5adff733a9752f1fad45b3",
+        "android_client_info": {
+          "package_name": "com.example.cookbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087665065290-pjs7e5k79r5h7779lj36v48t9jonengu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6OygKdsM75D_4TrqQ5sZKocXzsdNtw64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087665065290-pjs7e5k79r5h7779lj36v48t9jonengu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1087665065290-0j75sjbht63218aojloa94dlpra7cv1b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodNinja"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087665065290:android:f416b5acedd39838ad45b3",
+        "android_client_info": {
+          "package_name": "com.example.kukbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087665065290-pjs7e5k79r5h7779lj36v48t9jonengu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6OygKdsM75D_4TrqQ5sZKocXzsdNtw64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087665065290-pjs7e5k79r5h7779lj36v48t9jonengu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1087665065290-0j75sjbht63218aojloa94dlpra7cv1b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodNinja"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087665065290:android:008b1c223331a4fbad45b3",
+        "android_client_info": {
+          "package_name": "com.example.new_food_ninja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087665065290-pjs7e5k79r5h7779lj36v48t9jonengu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6OygKdsM75D_4TrqQ5sZKocXzsdNtw64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087665065290-pjs7e5k79r5h7779lj36v48t9jonengu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1087665065290-0j75sjbht63218aojloa94dlpra7cv1b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodNinja"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
