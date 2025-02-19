@@ -40,17 +40,17 @@ class AuthRepository {
       print(2);
       final Completer<String> completer = Completer();
       print(3);
-      //
-      // QuerySnapshot<Object?> users = await _user
-      //     .where('phone', isEqualTo: phone)
-      //     .where('delete', isEqualTo: false)
-      //     .get();
-      // print(4);
-      //
-      // if (users.docs.isNotEmpty) {
-      //   print(5);
-      //   return left(Failure('User exists'));
-      // }
+
+      QuerySnapshot<Object?> users = await _user
+          .where('phone', isEqualTo: phone)
+          .where('delete', isEqualTo: false)
+          .get();
+      print(4);
+
+      if (users.docs.isNotEmpty) {
+        print(5);
+        return left(Failure('User exists'));
+      }
 
       print(6);
       _firebaseAuth.verifyPhoneNumber(
