@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:kukbook/features/auth/repository/auth_repository.dart';
 import 'package:kukbook/features/home/screens/bottombar.dart';
+import 'package:kukbook/features/home/screens/diet1.dart';
 import 'package:kukbook/models/user_model.dart';
 
 import '../screens/create_password.dart';
@@ -33,15 +32,17 @@ class AuthController extends StateNotifier<bool> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(l.message)));
     }, (r) {
-      if (r != null) {
-        if (context.mounted) {
-          _ref.read(userProvider.notifier).update((state) => r);
-          print(r);
-          print('------------------------');
+      if (context.mounted) {
+        _ref.read(userProvider.notifier).update((state) => r['userModel']);
+        print(r);
+        print('------------------------');
+        if (r['isNewUser']) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Diet1(),),);
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => BottomNavBar(),
+              builder: (context) => const BottomNavBar(),
             ),
             (route) => false,
           );
@@ -122,5 +123,9 @@ class AuthController extends StateNotifier<bool> {
         ),
       );
     });
+  }
+
+  Future<UserModel> getUserFromId({required String id}) async {
+    return await _authRepository.getUserFromId(id: id);
   }
 }

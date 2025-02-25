@@ -5,9 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kukbook/core/common/utils.dart';
 import 'package:kukbook/core/constants/firebase_constants.dart';
 import 'package:kukbook/core/providers/firebase_providers.dart';
 import 'package:kukbook/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/failure.dart';
 import '../../../core/typedef.dart';
@@ -33,7 +35,8 @@ class AuthRepository {
   CollectionReference get _user =>
       _firebaseFirestore.collection(FirebaseConstants.users);
 
-  Future<Either<dynamic, String>> sendOtpToPhone({required String phone}) async {
+  Future<Either<dynamic, String>> sendOtpToPhone(
+      {required String phone}) async {
     print(1);
     print(phone);
     try {
@@ -63,7 +66,8 @@ class AuthRepository {
         verificationFailed: (error) {
           print(9);
           if (!completer.isCompleted) {
-            completer.completeError(Failure('Verification failed: ${error.message}'));
+            completer.completeError(
+                Failure('Verification failed: ${error.message}'));
           }
           print(10);
         },
@@ -99,7 +103,6 @@ class AuthRepository {
       return left(Failure(e.toString()));
     }
   }
-
 
   Future<Either<dynamic, UserModel>> verifyPhone({
     required String verificationId,
@@ -147,8 +150,9 @@ class AuthRepository {
     }
   }
 
-  FutureEither<UserModel?> signInWithGoogle() async {
+  FutureEither<Map> signInWithGoogle() async {
     try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       final GoogleSignInAccount? googleAccount = await _googleSignIn.signIn();
       final googleUser = await googleAccount?.authentication;
       final credential = GoogleAuthProvider.credential(
@@ -158,6 +162,7 @@ class AuthRepository {
 
       UserModel userModel;
       if (userCredential.additionalUserInfo!.isNewUser) {
+        prefs.setString('id', userCredential.user!.uid);
         print(1);
         DocumentReference ref = _user.doc(userCredential.user?.uid);
         userModel = UserModel(
@@ -168,7 +173,9 @@ class AuthRepository {
           id: userCredential.user!.uid,
           createdDate: DateTime.now(),
           delete: false,
-          search: [],
+          search: setSearchParam(
+              param:
+                  '${userCredential.user?.displayName} ${userCredential.user?.email} ${userCredential.user?.uid}'),
           profilePic: userCredential.user!.photoURL ?? "",
           bio: [],
           followers: [],
@@ -179,14 +186,17 @@ class AuthRepository {
           password: '',
         );
         print(2);
-      await  ref.set(userModel.toJson());
-        print(3); 
+        await ref.set(userModel.toJson());
+        print(3);
       } else {
         print(4);
         userModel = await getUserFromId(id: userCredential.user!.uid);
         print(5);
       }
-      return right(userModel);
+      return right({
+        'userModel': userModel,
+        'isNewUser': userCredential.additionalUserInfo?.isNewUser
+      });
     } on FirebaseException catch (e) {
       throw "${e.message}";
     } catch (e) {

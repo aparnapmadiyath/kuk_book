@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kukbook/core/common/utils.dart';
 import 'package:kukbook/core/common/widgets/custom_text_button.dart';
 import 'package:kukbook/core/common/widgets/custom_text_input.dart';
 import 'package:kukbook/core/common/widgets/custom_text_widget.dart';
@@ -76,8 +77,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                         alignment: Alignment.topRight,
                                         child: CircleAvatar(
                                           radius: w * 0.055,
-                                          backgroundColor:
-                                              Palette.primaryColor.withOpacity(0.65),
+                                          backgroundColor: Palette.primaryColor
+                                              .withOpacity(0.65),
                                         ),
                                       ),
                                       const CustomTextWidget(
@@ -104,9 +105,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: w*0.4,),
+                      SizedBox(
+                        height: w * 0.4,
+                      ),
                       Padding(
-                        padding: EdgeInsets.only(right: w * 0.05, bottom: w * 0.05),
+                        padding:
+                            EdgeInsets.only(right: w * 0.05, bottom: w * 0.05),
                         child: Column(
                           children: [
                             CustomTextInput(
@@ -156,60 +160,69 @@ class _SignUpPageState extends State<SignUpPage> {
                             SizedBox(
                               height: w * 0.05,
                             ),
-                             ],
+                          ],
                         ),
                       )
                     ],
                   ),
                 ),
               ),
-               Consumer(builder: (context, ref, child) {
-                              return Padding(
-                                padding:  EdgeInsets.only(right: w * 0.05),
-                                child: CustomTextButton(
-                                    text: "Next",
-                                    onPressed: () {
-                                      sendOtp(
-                                          ref: ref,
-                                          phone: phoneController.text.trim(),
-                                          name: nameController.text.trim(),
-                                          email: emailController.text.trim());
-                                    }),
-                              );
-                            }),
-                            
-                            Padding(
-                              padding:  EdgeInsets.symmetric(vertical: w * 0.1),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const CustomTextWidget(
-                                    text: "Already have an account?",
-                                    color: Palette.primaryColor,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const LoginPage(),
-                                        ),
-                                      );
-                                    },
-                                    child: Text(
-                                      "Login",
-                                      style: GoogleFonts.montserrat(
-                                        color: Palette.primaryColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: w * 0.036,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                        
+              Consumer(builder: (context, ref, child) {
+                return Padding(
+                  padding: EdgeInsets.only(right: w * 0.05),
+                  child: CustomTextButton(
+                      text: "Next",
+                      onPressed: () {
+                        if (nameController.text.trim().isEmpty) {
+                          showSnakbar(
+                              context: context, message: 'Enter your name');
+                        } else if (phoneController.text.trim().isEmpty) {
+                          showSnakbar(
+                              context: context, message: 'Enter phone number');
+                        } else if (emailController.text.trim().isEmpty) {
+                          showSnakbar(
+                              context: context, message: 'Enter email number');
+                        } else {
+                          sendOtp(
+                              ref: ref,
+                              phone: phoneController.text.trim(),
+                              name: nameController.text.trim(),
+                              email: emailController.text.trim());
+                        }
+                      }),
+                );
+              }),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: w * 0.1),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CustomTextWidget(
+                      text: "Already have an account?",
+                      color: Palette.primaryColor,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Login",
+                        style: GoogleFonts.montserrat(
+                          color: Palette.primaryColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: w * 0.036,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
