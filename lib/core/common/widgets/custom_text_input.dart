@@ -4,6 +4,7 @@ import 'package:kukbook/theme/palette.dart';
 
 import '../../../main.dart';
 
+
 class CustomTextInput extends StatefulWidget {
   final Color focusedBorderColor;
   final Color enabledBorderColor;
@@ -32,12 +33,12 @@ class CustomTextInput extends StatefulWidget {
     this.suffix,
     this.hintText,
     this.labelText,
-    this.hintSize=0.036,
-    this.hintWeight=FontWeight.w500,
-    this.hintTextColor=Palette.greyColor,
-    this.textColor=Palette.blackColor,
-    this.textSize=0.038,
-    this.textWeight=FontWeight.w600,
+    this.hintSize = 0.036,
+    this.hintWeight = FontWeight.w500,
+    this.hintTextColor = Palette.greyColor,
+    this.textColor = Palette.blackColor,
+    this.textSize = 0.038,
+    this.textWeight = FontWeight.w600,
   });
 
   @override
@@ -51,7 +52,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
       width: w,
       child: TextFormField(
         style: GoogleFonts.montserrat(
-          fontSize: w*widget.textSize,
+          fontSize: w * widget.textSize,
           fontWeight: widget.textWeight,
           color: widget.textColor,
         ),
@@ -66,7 +67,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: GoogleFonts.montserrat(
-            fontSize: w*widget.hintSize,
+            fontSize: w * widget.hintSize,
             fontWeight: widget.hintWeight,
             color: widget.hintTextColor,
           ),

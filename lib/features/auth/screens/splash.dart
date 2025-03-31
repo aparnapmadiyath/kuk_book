@@ -21,10 +21,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? id = prefs.getString('id');
     bool idExists = prefs.containsKey('id');
+    print(id);
+    print(idExists);
     if (id != null && idExists) {
+      print('splash 1');
       UserModel userModel = await ref
           .watch(authControllerProvider.notifier)
           .getUserFromId(id: id);
+      print('splash 2');
       Future.delayed(const Duration(seconds: 2)).then(
         (value) => Navigator.push(
           context,
@@ -33,7 +37,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           ),
         ),
       );
+      print('splash 3');
     } else {
+      print('splash 4');
       Future.delayed(const Duration(seconds: 2)).then(
         (value) => Navigator.push(
           context,
@@ -45,21 +51,22 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     }
   }
 
-  void navigationFunction() async {
-    await Future.delayed(const Duration(milliseconds: 100))
-        .then((value) => (value) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginOrSignUp(),
-                  ),
-                  (route) => false);
-            });
-  }
+  // void navigationFunction() async {
+  //   await Future.delayed(const Duration(milliseconds: 100))
+  //       .then((value) => (value) {
+  //             Navigator.pushAndRemoveUntil(
+  //                 context,
+  //                 MaterialPageRoute(
+  //                   builder: (context) => const LoginOrSignUp(),
+  //                 ),
+  //                 (route) => false);
+  //           });
+  // }
 
   @override
   void initState() {
-    navigationFunction();
+    keepLogin();
+    // navigationFunction();
     super.initState();
   }
 
